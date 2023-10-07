@@ -1,16 +1,8 @@
-"""
-Usage:
-    vocab.py TRAIN SENT_VOCAB TAG_VOCAB [options]
-
-Options:
-    --max-size=<int>   maximum size of the dictionary [default: 5000]
-    --freq-cutoff=<int>     frequency cutoff [default: 2]
-"""
 from itertools import chain
 from collections import Counter
 from utils import read_corpus
+import argparse
 import json
-
 
 class Vocab:
     def __init__(self, word2id, id2word):
@@ -71,3 +63,27 @@ class Vocab:
         with open(file_path, 'r', encoding='utf8') as f:
             entry = json.load(f)
         return Vocab(word2id=entry['word2id'], id2word=entry['id2word'])
+
+
+def main():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--input_path", required=True,
+    	                help="path to input text")
+    parser.add_argument("--sent_vocab", required=True,
+    	                help="Path to sentence vocab json file")
+    parser.add_argument("--tag_vocab", required=True,
+    	                help="Path to tag vocab json file")
+    parser.add_argument("--max_size", required=False, default=5000,
+    	                help="Path to sentence vocab json file")
+    parser.add_argument("--freq_cutoff", required=False, default=2,
+    	                help="Path to tag vocab json file")
+    sentences, tags = read_corpus(args.input_path)
+    sent_vocab = Vocab.build(sentences, int(args.max_size), int(args.freq_cutoff), is_tags=False)
+    tag_vocab = Vocab.build(tags, int(args.max_size), int(args.freq_cutoff), is_tags=True)
+    sent_vocab.save(args.sent_vocab)
+    tag_vocab.save(args.tag_vocab)
+
+
+if __name__ == '__main__':
+    main()

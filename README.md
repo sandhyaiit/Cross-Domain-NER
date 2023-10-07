@@ -1,6 +1,6 @@
 # Cross-Domain-NER
 ```
-usage: train.py [-h] -i INPUT_PATH -m METHOD --sent_vocab SENT_VOCAB --ner_tag_vocab NER_TAG_VOCAB --entity_tag_vocab ENTITY_TAG_VOCAB [--model_path MODEL_PATH] [--dropout_rate DROPOUT_RATE] [--embed_size EMBED_SIZE] [--hidden_size HIDDEN_SIZE]
+usage: train.py/test.py [-h] -i INPUT_PATH -m METHOD --sent_vocab SENT_VOCAB --ner_tag_vocab NER_TAG_VOCAB --entity_tag_vocab ENTITY_TAG_VOCAB [--model_path MODEL_PATH] [--dropout_rate DROPOUT_RATE] [--embed_size EMBED_SIZE] [--hidden_size HIDDEN_SIZE]
                 [--batch_size BATCH_SIZE] [--max_epoch MAX_EPOCH] [--clip_max_norm CLIP_MAX_NORM] [--lr LR] [--log_every LOG_EVERY] [--validation_every VALIDATION_EVERY] [--patience_threshold PATIENCE_THRESHOLD] [--max_patience MAX_PATIENCE] [--max_decay MAX_DECAY]
                 [--lr_decay LR_DECAY] [--model_save_path MODEL_SAVE_PATH] [--optimizer_save_path OPTIMIZER_SAVE_PATH] [--cuda]
 
@@ -30,7 +30,8 @@ optional arguments:
                         max epoch [default: 10]
   --clip_max_norm CLIP_MAX_NORM
                         clip max norm [default: 5.0]
-  --lr LR               learning rate [default: 0.001]
+  --lr LR
+                        learning rate [default: 0.001]
   --log_every LOG_EVERY
                         log every [default: 10]
   --validation_every VALIDATION_EVERY
@@ -41,7 +42,8 @@ optional arguments:
                         time of continuous worse performance to decay lr [default: 4]
   --max_decay MAX_DECAY
                         time of lr decay to early stop [default: 4]
-  --lr_decay LR_DECAY   decay rate of lr [default: 0.5]
+  --lr_decay LR_DECAY
+                        decay rate of lr [default: 0.5]
   --model_save_path MODEL_SAVE_PATH
                         model save path [default: ./model/model.pth]
   --optimizer_save_path OPTIMIZER_SAVE_PATH
@@ -49,3 +51,15 @@ optional arguments:
   --cuda                use GPU
 
 ```
+
+## How to Train
+```
+python train.py -m=NER_Entity -i ./data/train.txt --sent_vocab ./vocab/sent_vocab.json --ner_tag_vocab ./vocab/tag_vocab_ner.json --entity_tag_vocab ./vocab/tag_vocab_entity.json --cuda --validation-every 100 --max-decay 1 --embed-size 300 --max-epoch 100
+```
+
+## How to Test
+```
+python test.py -m=NER_Entity -i ./data/test.txt --sent_vocab ./vocab/sent_vocab.json --ner_tag_vocab ./vocab/tag_vocab_ner.json --entity_tag_vocab ./vocab/tag_vocab_entity.json --model_path ./model/model.pth --cuda --validation-every 100 --max-decay 1 --embed-size 300 --max-epoch 100
+```
+
+ 

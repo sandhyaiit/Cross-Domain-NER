@@ -54,12 +54,12 @@ optional arguments:
 
 ## How to Train
 ```
-python train.py -m=NER_Entity -i ./data/train.txt --sent_vocab ./vocab/sent_vocab.json --ner_tag_vocab ./vocab/tag_vocab_ner.json --entity_tag_vocab ./vocab/tag_vocab_entity.json --cuda --validation-every 100 --max-decay 1 --embed-size 300 --max-epoch 100
+python train.py -m=NER_Entity -i ./data/train.txt --sent_vocab ./vocab/sent_vocab.json --ner_tag_vocab ./vocab/tag_vocab_ner.json --entity_tag_vocab ./vocab/tag_vocab_entity.json --cuda --validation_every 100 --max_decay 1 --embed_size 300 --max_epoch 100
 ```
 
 ## How to Test
 ```
-python test.py -m=NER_Entity -i ./data/test.txt --sent_vocab ./vocab/sent_vocab.json --ner_tag_vocab ./vocab/tag_vocab_ner.json --entity_tag_vocab ./vocab/tag_vocab_entity.json --model_path ./model/model.pth --cuda --validation-every 100 --max-decay 1 --embed-size 300 --max-epoch 100
+python test.py -m=NER_Entity -i ./data/test.txt --sent_vocab ./vocab/sent_vocab.json --ner_tag_vocab ./vocab/tag_vocab_ner.json --entity_tag_vocab ./vocab/tag_vocab_entity.json --model_path ./model/model.pth --cuda --validation_every 100 --max_decay 1 --embed_size 300 --max_epoch 100
 ```
 
  
